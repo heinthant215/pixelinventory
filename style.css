@@ -1,0 +1,275 @@
+/* General Style */
+body {
+    font-family: 'Oswald', sans-serif;
+    background-color: hsl(231, 12%, 12%);
+    color: hsl(0, 0%, 100%);
+    margin: 0;
+    padding: 0;
+}
+
+/* Headers */
+h1, h2, h3 {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-family: 'Oswald', sans-serif;
+}
+
+h1 {
+    font-size: 3rem;
+    color: hsl(31, 100%, 51%);
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 2rem;
+    color: hsl(0, 0%, 100%);
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+/* Paragraphs */
+p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: hsl(0, 0%, 80%);
+}
+
+/* Header */
+.header {
+    background-color: hsl(234, 14%, 14%);
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 2rem;
+    color: hsl(31, 100%, 51%);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.nav-open-btn ion-icon {
+    font-size: 40px;
+    color: hsl(0, 0%, 100%);
+}
+
+/* Hero Section */
+.hero {
+    background-color: hsl(228, 12%, 17%);
+    padding: 100px 0;
+    margin-top: 80px;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    color: hsl(31, 100%, 51%);
+    margin-bottom: 20px;
+}
+
+.btn {
+    background-color: hsl(31, 100%, 51%);
+    color: hsl(0, 0%, 100%);
+    padding: 12px 30px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: hsl(234, 14%, 14%);
+}
+
+/* Section Containers */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 15px;
+}
+
+.section-title {
+    font-size: 2rem;
+    color: hsl(0, 0%, 100%);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 5px;
+    background: hsl(31, 100%, 51%);
+    margin: 10px auto;
+}
+
+/* New Games Section */
+.about {
+    background-color: hsl(234, 14%, 14%);
+    padding: 50px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+
+.about-title {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    color: hsl(31, 100%, 51%);
+}
+
+.about-text {
+    font-size: 1rem;
+    color: hsl(0, 0%, 80%);
+}
+
+/* Tournament Section */
+.tournament {
+    background-color: hsl(231, 12%, 12%);
+    padding: 40px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+
+.tournament-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    color: hsl(31, 100%, 51%);
+}
+
+.tournament-text {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: hsl(0, 0%, 80%);
+}
+
+/* Items Section */
+.gears-card {
+    background-color: hsl(240, 11%, 9%);
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: hsl(31, 100%, 51%);
+}
+
+.add-to-cart {
+    font-size: 1.1rem;
+    padding: 10px 25px;
+    background-color: hsl(31, 100%, 51%);
+    color: hsl(0, 0%, 100%);
+    border-radius: 6px;
+}
+
+.add-to-cart:hover {
+    background-color: hsl(234, 14%, 14%);
+}
+
+/* Cart Section */
+#cart-items p {
+    font-size: 1rem;
+    color: hsl(0, 0%, 100%);
+    margin-bottom: 10px;
+}
+
+#checkout {
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    background-color: hsl(31, 100%, 51%);
+    color: hsl(0, 0%, 100%);
+    border-radius: 8px;
+}
+
+/* Team Section */
+.team-member {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.team p {
+    font-size: 1.1rem;
+    color: hsl(0, 0%, 100%);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    h1, h2 {
+        font-size: 1.6rem;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .btn, .add-to-cart, #checkout {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}
+
+/* Hero Section */
+.hero {
+    background-color: hsl(228, 12%, 17%);
+    padding: 100px 20px;  /* Increased top padding to ensure space for header */
+    margin-top: 80px;  /* Extra margin to account for the fixed header */
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    color: hsl(31, 100%, 51%);
+    margin-bottom: 20px;
+}
+
+/* Hero Section with Background Image */
+/* Hero Section with Adjusted Background Image */
+/* Hero Section with Further Adjusted Background Image */
+
+/* Hero Section with More Adjusted Background Image */
+
+/* Hero Section with Properly Positioned Background Image */
+/* Hero Section with Further Adjusted Background Image */
+.hero {
+    background-image: url(./Items/images/background.jpg); /* Replace with the correct path */
+    background-size: contain; /* This will ensure the whole image fits within the section */
+    background-repeat: no-repeat; /* Avoid repeating the background */
+    background-position: center center; /* Center the image to get all characters visible */
+    padding: 100px 20px;
+    margin-top: 80px;
+    text-align: center;
+    color: white; /* Ensure text color contrasts with the background */
+    min-height: 500px; /* Adjust height to show more of the image */
+}
+
+
+
+
+
+
+
