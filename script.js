@@ -1,33 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const cartItems = [];
+    // Load cart from localStorage or initialize an empty array
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
     // Add to cart functionality
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', (event) => {
             const itemElement = event.target.closest('.item');
             const name = itemElement.dataset.name;
-            const price = itemElement.dataset.price;
+            const price = parseFloat(itemElement.dataset.price);
 
             // Check if the item is already in the cart
-            const isAlreadyInCart = cartItems.some(item => item.name === name);
+            const existingItem = cartItems.find(item => item.name === name);
 
-            if (!isAlreadyInCart) {
-                cartItems.push({ name, price });
+            if (!existingItem) {
+                cartItems.push({ name, price, quantity: 1 });
+                alert(`${name} has been added to the cart.`);
                 updateCart();
+                localStorage.setItem('cart', JSON.stringify(cartItems));  // Save cart to localStorage
             } else {
                 alert(`${name} is already in your cart.`);
             }
         });
     });
 
-    // Update cart function
+    // Update cart display
     function updateCart() {
         const cartItemsContainer = document.getElementById('cart-items');
         cartItemsContainer.innerHTML = '';
 
-        cartItems.forEach((item, index) => {
+        cartItems.forEach(item => {
             const itemElement = document.createElement('p');
-            itemElement.textContent = `${item.name} - $${item.price}`;
+            itemElement.textContent = `${item.name} - $${item.price} x ${item.quantity}`;
             cartItemsContainer.appendChild(itemElement);
         });
 
@@ -37,11 +40,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Checkout functionality (Buy)
-    document.getElementById('checkout').addEventListener('click', () => {
+    document.getElementById('checkout').addEventListener('click', async () => {
         if (cartItems.length > 0) {
-            alert('Items purchased successfully!');
-            cartItems.length = 0;  // Clear the cart
-            updateCart();
+            try {
+                const response = await fetch('/checkout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ cartItems }),  // Send cart data to backend
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Order placed successfully!');
+                    cartItems.length = 0;  // Clear the cart
+                    localStorage.removeItem('cart');  // Clear the cart from localStorage
+                    updateCart();
+                } else {
+                    alert('Failed to place the order.');
+                }
+            } catch (error) {
+                console.error('Error during checkout:', error);
+                alert('An error occurred during checkout.');
+            }
         } else {
             alert('Your cart is empty!');
         }
@@ -49,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Watch Stream button
     document.getElementById('watch-stream').addEventListener('click', () => {
-        window.open('https://www.example.com/stream', '_blank'); // Replace with actual stream URL
+        window.open('https://www.example.com/stream', '_blank');  // Replace with actual stream URL
     });
 
     // Initial update for an empty cart
