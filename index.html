@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GameX Shop & Stream</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Pixel Inventory</title>
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <!-- Header Section -->
@@ -26,16 +26,27 @@
     <!-- New Games Section -->
     <section id="new-games" class="container about">
       <h2 class="section-title">New Games</h2>
-      <div class="game about-content">
-        <h3 class="about-title">Game 1</h3>
-        <p class="about-text">
-          Description of Game 1. Recently released, featuring exciting new
-          gameplay.
-        </p>
-      </div>
-      <div class="game about-content">
-        <h3 class="about-title">Game 2</h3>
-        <p class="about-text">Check out this amazing new adventure.</p>
+      <div class="games">
+        <div class="game-content">
+          <h3 class="about-title">Eclipse Realm</h3>
+          <img
+            src="./public/images/eclipse_game.png"
+            alt="Eclipse Realm Game"
+          />
+          <p class="about-text">
+            An action-packed fantasy game filled with adventure and combat.
+          </p>
+        </div>
+        <div class="game-content">
+          <h3 class="about-title">Cyber Dojo</h3>
+          <img
+            src="./public/images/cyber_dojo_game.png"
+            alt="Cyber Dojo Game"
+          />
+          <p class="about-text">
+            A futuristic martial arts challenge in a cyberpunk world.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -46,12 +57,12 @@
       <div class="tournament-posters">
         <!-- Tournament 1 with Registration Poster -->
         <div class="tournament-content">
-          <h3 class="tournament-title">PSBA MLBB Tournament Registration</h3>
+          <h3 class="tournament-title">Tournament Registration</h3>
           <p class="tournament-text">
             Register for the PSBA MLBB Tournament today!
           </p>
           <img
-            src="./Items/images/mlbb_registration.jpeg"
+            src="./public/images/mlbb_registration.jpeg"
             alt="MLBB Tournament Registration"
             class="tournament-poster"
           />
@@ -59,12 +70,12 @@
 
         <!-- Tournament 2 with Audience Poster -->
         <div class="tournament-content">
-          <h3 class="tournament-title">PSBA MLBB Tournament Audience</h3>
+          <h3 class="tournament-title">Tournament Audience</h3>
           <p class="tournament-text">
             Be a part of the audience and watch live action on October 25!
           </p>
           <img
-            src="./Items/images/mlbb_audience.jpeg"
+            src="./public/images/mlbb_audience.jpeg"
             alt="MLBB Tournament Audience"
             class="tournament-poster"
           />
@@ -77,20 +88,24 @@
       <h2 class="section-title">Available Items</h2>
 
       <!-- Gear Item 1 -->
-      <div class="item gears-card">
+      <div class="item gears-card" data-name="Gaming Headset" data-price="109">
         <div class="card-banner">
-          <img src="./Items/images/gears-img-1.png" alt="Gear Image 1" />
+          <img src="./public/images/gears-img-1.png" alt="Gear Image 1" />
         </div>
-        <p class="card-title">Gear 1 - $10</p>
+        <p class="card-title">Gaming Headset - $109</p>
         <button class="btn btn-primary add-to-cart">Add to Cart</button>
       </div>
 
       <!-- Gear Item 2 -->
-      <div class="item gears-card">
+      <div
+        class="item gears-card"
+        data-name="Gaming Controller"
+        data-price="189"
+      >
         <div class="card-banner">
-          <img src="./Items/images/gears-img-2.png" alt="Gear Image 2" />
+          <img src="./public/images/gears-img-2.png" alt="Gear Image 2" />
         </div>
-        <p class="card-title">Gear 2 - $20</p>
+        <p class="card-title">Gaming Controller - $189</p>
         <button class="btn btn-primary add-to-cart">Add to Cart</button>
       </div>
     </section>
