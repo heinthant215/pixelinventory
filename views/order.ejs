@@ -1,0 +1,8 @@
+<h1>Orders</h1>
+<% orders.forEach(order => { %>
+  <div>
+    <h2>Order by <%= order.user.email %></h2>
+    <p>Total Amount: $<%= order.totalAmount %></p>
+    <p>Status: <%= order.status %></p>
+  </div>
+<% }) %>

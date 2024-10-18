@@ -1,0 +1,12 @@
+<% products.forEach(product => { %>
+    <div>
+      <h2><%= product.name %></h2>
+      <p>Price: $<%= product.price %></p>
+      <p>Description: <%= product.description %></p>
+      <a href="/admin/products/edit/<%= product._id %>">Edit</a>
+      <form action="/admin/products/delete/<%= product._id %>" method="POST">
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+  <% }) %>
+  
