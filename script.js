@@ -57,9 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert('Order placed successfully!');
                     cartItems.length = 0;  // Clear the cart
                     localStorage.removeItem('cart');  // Clear the cart from localStorage
-                    updateCart();
+                    updateCart();  // Update the cart UI
                 } else {
-                    alert('Failed to place the order.');
+                    alert(result.message || 'Failed to place the order.');
                 }
             } catch (error) {
                 console.error('Error during checkout:', error);
@@ -70,11 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Watch Stream button
+    // Watch Stream button functionality
     document.getElementById('watch-stream').addEventListener('click', () => {
-        window.open('https://www.example.com/stream', '_blank');  // Replace with actual stream URL
+        window.open('https://www.example.com/stream', '_blank');  // Replace with your actual stream URL
     });
 
-    // Initial update for an empty cart
+    // Initial update for the cart display
     updateCart();
 });
