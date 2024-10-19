@@ -121,7 +121,7 @@
       <button id="buy-btn" class="btn btn-primary">Buy</button>
     </section>
 
-    <!-- Pop-up Modal for Payment Methods -->
+   <!-- Pop-up Modal for Payment Methods -->
 <div id="payment-modal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
@@ -135,21 +135,45 @@
       </select>
 
       <!-- Credit Card Details Section (Initially Hidden) -->
-<div id="credit-card-details" style="display: none; margin-top: 20px;">
-  <h3>Enter Credit Card Details</h3>
-  <label for="card-number">Card Number:</label>
-  <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" required />
+      <div id="credit-card-details" style="display: none; margin-top: 20px;">
+        <h3>Enter Credit Card Details</h3>
+        <label for="card-number">Card Number:</label>
+        <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" required />
 
-  <label for="expiry-date">Expiry Date:</label>
-  <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required />
+        <label for="expiry-date">Expiry Date:</label>
+        <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required />
 
-  <label for="cvv">CVV:</label>
-  <input type="text" id="cvv" name="cvv" placeholder="123" required />
-</div>
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" name="cvv" placeholder="123" required />
+      </div>
 
+      <!-- Shipping Address Section (Initially Hidden) -->
+      <div id="shipping-address" style="display: none; margin-top: 20px;">
+        <h3>Enter Shipping Address</h3>
+        <label for="address-line-1">Address Line 1:</label>
+        <input type="text" id="address-line-1" name="address-line-1" placeholder="123 Main St" required />
+
+        <label for="address-line-2">Address Line 2 (Optional):</label>
+        <input type="text" id="address-line-2" name="address-line-2" placeholder="Apt, Suite, etc." />
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" placeholder="City" required />
+
+        <label for="state">State/Province:</label>
+        <input type="text" id="state" name="state" placeholder="State/Province" required />
+
+        <label for="zip-code">Zip Code:</label>
+        <input type="text" id="zip-code" name="zip-code" placeholder="12345" required />
+
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" placeholder="Country" required />
+
+        <br />
+        <button type="submit" class="btn btn-primary" id="submit-shipping">Submit Shipping Address</button>
+      </div>
 
       <br />
-      <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+      <button type="submit" class="btn btn-primary" id="proceed-to-shipping">Proceed to Payment</button>
     </form>
   </div>
 </div>
@@ -179,7 +203,7 @@
         </li>
       </ul>
     </section>
-
+ 
     <script src="script.js"></script>
   </body>
 </html>

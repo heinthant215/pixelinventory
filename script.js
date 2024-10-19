@@ -68,16 +68,66 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get the credit card details section
     var creditCardDetails = document.getElementById("credit-card-details");
 
+    // Get the shipping address section
+    var shippingAddressSection = document.getElementById("shipping-address");
+
     // Get the payment method dropdown
     var paymentMethodDropdown = document.getElementById("payment-method");
 
-    // Show/Hide credit card details based on selected payment method
-    paymentMethodDropdown.addEventListener('change', function() {
-        if (this.value === "credit-card") {
+    // When the user clicks "Proceed to Payment", show the credit card section
+    document.getElementById("proceed-to-shipping").addEventListener("click", function(event) {
+        event.preventDefault();
+
+        // Only show credit card details if the selected method is "Credit Card"
+        if (paymentMethodDropdown.value === "credit-card") {
             creditCardDetails.style.display = "block";  // Show credit card section
+            shippingAddressSection.style.display = "none"; // Hide shipping address until credit card details are entered
         } else {
-            creditCardDetails.style.display = "none";  // Hide credit card section
+            alert("Please select a valid payment method.");
         }
+    });
+
+    // When the user submits credit card details, proceed to shipping
+    document.getElementById("proceed-to-shipping").addEventListener("click", function(event) {
+        event.preventDefault();
+
+        // Retrieve and validate credit card details
+        var cardNumber = document.getElementById('card-number').value;
+        var expiryDate = document.getElementById('expiry-date').value;
+        var cvv = document.getElementById('cvv').value;
+
+        if (!cardNumber || !expiryDate || !cvv) {
+            alert("Please fill out all credit card details.");
+            return;
+        }
+
+        // Hide credit card form and show shipping address form
+        creditCardDetails.style.display = "none";
+        shippingAddressSection.style.display = "block";  // Show shipping form
+    });
+
+    // Handle shipping address submission
+    document.getElementById("submit-shipping").addEventListener("click", function(event) {
+        event.preventDefault();
+
+        // Get shipping address values
+        var addressLine1 = document.getElementById('address-line-1').value;
+        var addressLine2 = document.getElementById('address-line-2').value;
+        var city = document.getElementById('city').value;
+        var state = document.getElementById('state').value;
+        var zipCode = document.getElementById('zip-code').value;
+        var country = document.getElementById('country').value;
+
+        if (!addressLine1 || !city || !state || !zipCode || !country) {
+            alert("Please fill out all required shipping address fields.");
+            return;
+        }
+
+        // Process shipping details (You can replace the alert with actual logic)
+        alert("Shipping Address: " + addressLine1 + ", " + city + ", " + state + ", " + zipCode + ", " + country);
+
+        // Close modal after processing shipping
+        modal.style.display = "none";
     });
 
     // When the user clicks the button, open the modal
@@ -96,26 +146,4 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display = "none";
         }
     };
-
-    // Handle form submission (with credit card processing or other logic)
-    document.getElementById("payment-form").addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        var paymentMethod = document.getElementById("payment-method").value;
-
-        if (paymentMethod === 'credit-card') {
-            // Retrieve and process credit card details
-            var cardNumber = document.getElementById('card-number').value;
-            var expiryDate = document.getElementById('expiry-date').value;
-            var cvv = document.getElementById('cvv').value;
-
-            alert("Credit Card Info: " + cardNumber + " Expiry: " + expiryDate + " CVV: " + cvv);
-
-            // Additional logic for processing credit card details
-        } else {
-            alert("You selected: " + paymentMethod);
-        }
-
-        modal.style.display = "none";  // Close the modal after selection
-    });
 });
