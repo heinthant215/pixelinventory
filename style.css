@@ -246,6 +246,81 @@ p {
   margin-bottom: 10px;
 }
 
+/* Modal (Pop-up) Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Darker background for overlay */
+}
+
+.modal-content {
+  background-color: hsl(231, 12%, 12%); /* Dark background to match the theme */
+  margin: 10% auto; /* Vertically centered */
+  padding: 30px;
+  border-radius: 10px;
+  width: 50%;
+  max-width: 500px;
+  text-align: center;
+  color: hsl(0, 0%, 100%); /* White text */
+}
+
+.modal-content h2 {
+  font-size: 1.8rem;
+  color: hsl(31, 100%, 51%); /* Orange title color */
+  margin-bottom: 20px;
+}
+
+.modal-content label {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  display: block;
+  color: hsl(0, 0%, 80%); /* Light grey text */
+}
+
+.modal-content select {
+  padding: 10px;
+  font-size: 1.1rem;
+  background-color: hsl(234, 14%, 14%); /* Match with button color */
+  color: hsl(0, 0%, 100%);
+  border: 2px solid hsl(31, 100%, 51%);
+  border-radius: 5px;
+  width: 100%;
+}
+
+.modal-content button {
+  margin-top: 20px;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  background-color: hsl(31, 100%, 51%); /* Button styled to match UI */
+  color: hsl(0, 0%, 100%);
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.modal-content button:hover {
+  background-color: hsl(234, 14%, 14%);
+}
+
+.close {
+  color: hsl(0, 0%, 80%);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: hsl(0, 0%, 100%);
+}
+
 
 #checkout {
   font-size: 1.2rem;

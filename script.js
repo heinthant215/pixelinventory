@@ -61,3 +61,42 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial update for the cart display
     updateCart();
 });
+
+// Get modal element
+var modal = document.getElementById("payment-modal");
+
+// Get the button that opens the modal
+var buyBtn = document.getElementById("buy-btn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+buyBtn.onclick = function () {
+  modal.style.display = "block";
+};
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+  modal.style.display = "none";
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
+// Handle payment method submission
+document.getElementById("payment-form").addEventListener("submit", function (event) {
+  event.preventDefault();
+  var paymentMethod = document.getElementById("payment-method").value;
+  
+  alert("You selected: " + paymentMethod); // Show selected payment method
+  
+  // You can add payment processing logic here
+  
+  modal.style.display = "none"; // Close the modal after selection
+});
+
