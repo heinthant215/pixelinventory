@@ -321,6 +321,26 @@ p {
   color: hsl(0, 0%, 100%);
 }
 
+/* Credit Card Details Section */
+#credit-card-details input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid hsl(31, 100%, 51%);
+  border-radius: 5px;
+  background-color: hsl(234, 14%, 14%); /* Dark background */
+  color: hsl(0, 0%, 100%); /* White text */
+  font-size: 1rem;
+}
+
+#credit-card-details label {
+  font-size: 1.2rem;
+  display: block;
+  margin-bottom: 10px;
+  color: hsl(0, 0%, 80%); /* Light grey text */
+}
+
+
 
 #checkout {
   font-size: 1.2rem;

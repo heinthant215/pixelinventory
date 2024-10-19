@@ -22,18 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Reset cart functionality
     document.getElementById('reset-cart').addEventListener('click', function() {
-        // Clear the cart stored in localStorage
         localStorage.removeItem('cart');
-        
-        // Optionally clear any cart display in the DOM
         document.getElementById('cart-items').innerHTML = '';
-    
-        // Refresh the page to update the UI
         location.reload();
     });
-    
-    
 
     // Update cart display
     function updateCart() {
@@ -51,8 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
-
     // Watch Stream button functionality
     document.getElementById('watch-stream').addEventListener('click', () => {
         window.open('https://www.example.com/stream', '_blank');  // Replace with your actual stream URL
@@ -60,43 +53,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial update for the cart display
     updateCart();
+
+    // Modal functionality
+
+    // Get modal element
+    var modal = document.getElementById("payment-modal");
+
+    // Get the button that opens the modal
+    var buyBtn = document.getElementById("buy-btn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // Get the credit card details section
+    var creditCardDetails = document.getElementById("credit-card-details");
+
+    // Get the payment method dropdown
+    var paymentMethodDropdown = document.getElementById("payment-method");
+
+    // Show/Hide credit card details based on selected payment method
+    paymentMethodDropdown.addEventListener('change', function() {
+        if (this.value === "credit-card") {
+            creditCardDetails.style.display = "block";  // Show credit card section
+        } else {
+            creditCardDetails.style.display = "none";  // Hide credit card section
+        }
+    });
+
+    // When the user clicks the button, open the modal
+    buyBtn.onclick = function () {
+        modal.style.display = "block";
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+
+    // Handle form submission (with credit card processing or other logic)
+    document.getElementById("payment-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var paymentMethod = document.getElementById("payment-method").value;
+
+        if (paymentMethod === 'credit-card') {
+            // Retrieve and process credit card details
+            var cardNumber = document.getElementById('card-number').value;
+            var expiryDate = document.getElementById('expiry-date').value;
+            var cvv = document.getElementById('cvv').value;
+
+            alert("Credit Card Info: " + cardNumber + " Expiry: " + expiryDate + " CVV: " + cvv);
+
+            // Additional logic for processing credit card details
+        } else {
+            alert("You selected: " + paymentMethod);
+        }
+
+        modal.style.display = "none";  // Close the modal after selection
+    });
 });
-
-// Get modal element
-var modal = document.getElementById("payment-modal");
-
-// Get the button that opens the modal
-var buyBtn = document.getElementById("buy-btn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal
-buyBtn.onclick = function () {
-  modal.style.display = "block";
-};
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-  modal.style.display = "none";
-};
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
-
-// Handle payment method submission
-document.getElementById("payment-form").addEventListener("submit", function (event) {
-  event.preventDefault();
-  var paymentMethod = document.getElementById("payment-method").value;
-  
-  alert("You selected: " + paymentMethod); // Show selected payment method
-  
-  // You can add payment processing logic here
-  
-  modal.style.display = "none"; // Close the modal after selection
-});
-
