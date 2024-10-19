@@ -77,9 +77,17 @@ p {
   min-height: 500px;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   box-sizing: border-box;
 }
+
+#watch-stream {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-decoration: none;
+}
+
 
 .hero-title {
   font-size: 2.5rem;
@@ -89,8 +97,8 @@ p {
 
 /* Button Style */
 .btn {
-  background-color: hsl(31, 100%, 51%);
-  color: hsl(0, 0%, 100%);
+  background-color: black;
+  color: hsl(31, 100%, 51%);
   padding: 12px 30px;
   border-radius: 8px;
   border: none;
