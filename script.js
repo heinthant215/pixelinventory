@@ -22,6 +22,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+    document.getElementById('reset-cart').addEventListener('click', function() {
+        // Clear the cart stored in localStorage
+        localStorage.removeItem('cart');
+        
+        // Optionally clear any cart display in the DOM
+        document.getElementById('cart-items').innerHTML = '';
+    
+        // Refresh the page to update the UI
+        location.reload();
+    });
+    
+    
 
     // Update cart display
     function updateCart() {
