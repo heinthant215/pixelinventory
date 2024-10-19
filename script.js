@@ -51,36 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Checkout functionality (Buy)
-    document.getElementById('checkout').addEventListener('click', async () => {
-        if (cartItems.length > 0) {
-            try {
-                const response = await fetch('/checkout', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ cartItems }),  // Send cart data to backend
-                });
 
-                const result = await response.json();
-
-                if (result.success) {
-                    alert('Order placed successfully!');
-                    cartItems.length = 0;  // Clear the cart
-                    localStorage.removeItem('cart');  // Clear the cart from localStorage
-                    updateCart();  // Update the cart UI
-                } else {
-                    alert(result.message || 'Failed to place the order.');
-                }
-            } catch (error) {
-                console.error('Error during checkout:', error);
-                alert('An error occurred during checkout.');
-            }
-        } else {
-            alert('Your cart is empty!');
-        }
-    });
 
     // Watch Stream button functionality
     document.getElementById('watch-stream').addEventListener('click', () => {
