@@ -46,6 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Watch Stream button functionality
+    document.getElementById('watch-stream').addEventListener('click', () => {
+        window.open('https://www.example.com/stream', '_blank');  // Replace with your actual stream URL
+    });
+
     // Initial update for the cart display
     updateCart();
 
@@ -54,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get modal element
     var modal = document.getElementById("payment-modal");
 
-    // Get the button that opens the modal (Buy button)
+    // Get the button that opens the modal
     var buyBtn = document.getElementById("buy-btn");
 
     // Get the <span> element that closes the modal
@@ -63,25 +68,71 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get the credit card details section
     var creditCardDetails = document.getElementById("credit-card-details");
 
+    // Get the shipping address section
+    var shippingAddressSection = document.getElementById("shipping-address");
+
     // Get the payment method dropdown
     var paymentMethodDropdown = document.getElementById("payment-method");
 
-    // Show/Hide credit card details based on selected payment method
-    paymentMethodDropdown.addEventListener('change', function() {
-        if (this.value === "credit-card") {
+    // When the user clicks "Proceed to Payment", show the credit card section
+    document.getElementById("proceed-to-shipping").addEventListener("click", function(event) {
+        event.preventDefault();
+
+        // Only show credit card details if the selected method is "Credit Card"
+        if (paymentMethodDropdown.value === "credit-card") {
             creditCardDetails.style.display = "block";  // Show credit card section
+            shippingAddressSection.style.display = "none"; // Hide shipping address until credit card details are entered
         } else {
-            creditCardDetails.style.display = "none";  // Hide credit card section
+            alert("Please select a valid payment method.");
         }
     });
 
-    // When the user clicks the "Buy" button, open the modal
-    buyBtn.onclick = function () {
-        if (cartItems.length === 0) {
-            alert("Your cart is empty. Please add items to the cart before proceeding.");
+    // When the user submits credit card details, proceed to shipping
+    document.getElementById("proceed-to-shipping").addEventListener("click", function(event) {
+        event.preventDefault();
+
+        // Retrieve and validate credit card details
+        var cardNumber = document.getElementById('card-number').value;
+        var expiryDate = document.getElementById('expiry-date').value;
+        var cvv = document.getElementById('cvv').value;
+
+        if (!cardNumber || !expiryDate || !cvv) {
+            alert("Please fill out all credit card details.");
             return;
         }
-        modal.style.display = "block";  // Open the payment modal
+
+        // Hide credit card form and show shipping address form
+        creditCardDetails.style.display = "none";
+        shippingAddressSection.style.display = "block";  // Show shipping form
+    });
+
+    // Handle shipping address submission
+    document.getElementById("submit-shipping").addEventListener("click", function(event) {
+        event.preventDefault();
+
+        // Get shipping address values
+        var addressLine1 = document.getElementById('address-line-1').value;
+        var addressLine2 = document.getElementById('address-line-2').value;
+        var city = document.getElementById('city').value;
+        var state = document.getElementById('state').value;
+        var zipCode = document.getElementById('zip-code').value;
+        var country = document.getElementById('country').value;
+
+        if (!addressLine1 || !city || !state || !zipCode || !country) {
+            alert("Please fill out all required shipping address fields.");
+            return;
+        }
+
+        // Process shipping details (You can replace the alert with actual logic)
+        alert("Shipping Address: " + addressLine1 + ", " + city + ", " + state + ", " + zipCode + ", " + country);
+
+        // Close modal after processing shipping
+        modal.style.display = "none";
+    });
+
+    // When the user clicks the button, open the modal
+    buyBtn.onclick = function () {
+        modal.style.display = "block";
     };
 
     // When the user clicks on <span> (x), close the modal
@@ -95,30 +146,4 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display = "none";
         }
     };
-
-    // Handle form submission (proceed to payment logic)
-    document.getElementById("payment-form").addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        var paymentMethod = document.getElementById("payment-method").value;
-
-        if (paymentMethod === 'credit-card') {
-            // Retrieve and process credit card details
-            var cardNumber = document.getElementById('card-number').value;
-            var expiryDate = document.getElementById('expiry-date').value;
-            var cvv = document.getElementById('cvv').value;
-
-            if (!cardNumber || !expiryDate || !cvv) {
-                alert("Please fill out all credit card details.");
-                return;
-            }
-
-            alert("Payment successful! Credit Card Info: " + cardNumber + " Expiry: " + expiryDate);
-        } else {
-            alert("You selected: " + paymentMethod + " Payment successful!");
-        }
-
-        // Close the modal after selection
-        modal.style.display = "none";
-    });
 });

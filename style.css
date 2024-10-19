@@ -340,6 +340,34 @@ p {
   color: hsl(0, 0%, 80%); /* Light grey text */
 }
 
+/* Disable body scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Modal styling */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0, 0, 0, 0.8); /* Black background with transparency */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color:hsl(234, 14%, 14%);
+  margin: 5% auto; /* 5% from the top and centered */
+  padding: 20px;
+  border-radius: 10px;
+  width: 50%; /* Default modal width */
+  max-height: 80vh; /* Max height of modal */
+  overflow-y: auto; /* Enable scrolling inside the modal */
+  box-sizing: border-box;
+}
 
 
 #checkout {
@@ -405,4 +433,23 @@ p {
   .tournament-content {
     max-width: 100%;
   }
+  .modal-content {
+    width: 90%; /* Ensure modal takes most of the screen on smaller devices */
+    max-height: 80vh; /* Reduce height slightly for mobile */
+    padding: 10px; /* Adjust padding for better fit */
+  }
+
+  /* Ensure that the buttons are always visible */
+  .btn-primary {
+    width: 100%; /* Make the button full width on small screens */
+    padding: 12px;
+    margin-top: 10px; /* Add spacing between the input fields and the button */
+  }
+
+  /* Make sure the credit card fields are responsive */
+  #credit-card-details input {
+    width: 100%; /* Full width input fields */
+    margin-bottom: 10px; /* Add margin to space them out */
+  }
+
 }
