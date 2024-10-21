@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Orders</title>
+</head>
+<body>
+  <h1>Orders</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>User</th>
+        <th>Items</th>
+        <th>Total Amount</th>
+        <th>Status</th>
+        <th>Payment Method</th>
+        <th>Shipping Address</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% orders.forEach(order => { %>
+        <tr>
+          <td><%= order._id %></td>
+          <td><%= order.user.username %></td>
+          <td>
+            <ul>
+              <% order.items.forEach(item => { %>
+                <li><%= item.product.name %> - Quantity: <%= item.quantity %></li>
+              <% }) %>
+            </ul>
+          </td>
+          <td>$<%= order.totalAmount %></td>
+          <td><%= order.status %></td>
+          <td><%= order.paymentMethod %></td>
+          <td>
+            <p><%= order.shippingAddress.addressLine1 %>, <%= order.shippingAddress.city %></p>
+            <p><%= order.shippingAddress.state %>, <%= order.shippingAddress.country %>, <%= order.shippingAddress.zipCode %></p>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>

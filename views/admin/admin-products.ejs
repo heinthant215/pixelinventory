@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Products</title>
+    <link rel="stylesheet" href="/css/style.css" /> <!-- Link to your CSS file -->
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="logo">Admin - Product Management</div>
+      </div>
+    </header>
+    <section class="container">
+      <h2>All Products</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% products.forEach(product => { %>
+            <tr>
+              <td><%= product.name %></td>
+              <td>$<%= product.price %></td>
+              <td>
+                <a href="/admin/products/edit/<%= product._id %>" class="btn">Edit</a>
+                <form action="/admin/products/delete/<%= product._id %>" method="POST" style="display: inline;">
+                  <button type="submit" class="btn">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </section>
+  </body>
+</html>

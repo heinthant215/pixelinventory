@@ -1,4 +1,41 @@
-<h1>Admin Dashboard</h1>
-<a href="/admin/products">Manage Products</a>
-<a href="/admin/users">Manage Users</a>
-<a href="/admin/orders">View Orders</a>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../style.css" /> <!-- Corrected path -->
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="logo">Pixel Inventory Admin</div>
+        <button class="nav-open-btn">
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+      </div>
+    </header>
+
+    <section id="admin-dashboard" class="container">
+      <h2 class="section-title">Admin Dashboard</h2>
+      <p>Welcome, <%= user.username %>!</p>
+
+      <section id="admin-actions">
+        <div class="actions">
+          <h3>Manage Products</h3>
+          <a href="/admin/products" class="btn btn-primary">View Products</a>
+        </div>
+        <div class="actions">
+          <h3>Manage Users</h3>
+          <a href="/admin/users" class="btn btn-primary">View Users</a>
+        </div>
+        <div class="actions">
+          <h3>Manage Orders</h3>
+          <a href="/admin/orders" class="btn btn-primary">View Orders</a>
+        </div>
+      </section>
+    </section>
+
+    <script src="/js/script.js"></script> <!-- Link JS file if needed -->
+  </body>
+</html>

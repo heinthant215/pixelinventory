@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Orders Dashboard</title>
+  <link rel="stylesheet" href="/style.css"> <!-- Add your styles here -->
+</head>
+<body>
+  <h1>Orders Dashboard</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>User</th>
+        <th>Items</th>
+        <th>Total Amount</th>
+        <th>Payment Method</th>
+        <th>Shipping Address</th>
+        <th>Status</th>
+        <th>Order Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% orders.forEach(order => { %>
+        <tr>
+          <td><%= order._id %></td>
+          <td><%= order.user.username %></td>
+          <td>
+            <ul>
+              <% order.items.forEach(item => { %>
+                <li><%= item.name %> (x<%= item.quantity %>) - $<%= item.price %></li>
+              <% }) %>
+            </ul>
+          </td>
+          <td>$<%= order.totalAmount %></td>
+          <td><%= order.paymentMethod %></td>
+          <td>
+            <%= order.shippingAddress.addressLine1 %>, <%= order.shippingAddress.city %>, <%= order.shippingAddress.state %>, <%= order.shippingAddress.zipCode %>, <%= order.shippingAddress.country %>
+          </td>
+          <td><%= order.status %></td>
+          <td><%= order.createdAt.toLocaleDateString() %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>
