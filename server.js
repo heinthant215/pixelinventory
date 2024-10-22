@@ -1,10 +1,11 @@
 const express = require("express");
-const session = require("express-session"); // To handle sessions
+const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const User = require("./models/User"); // Ensure User model is imported
-const flash = require("connect-flash"); // Flash messages middleware
-const path = require("path"); // To manage views directory
+const User = require("./models/User");
+const bcrypt = require("bcryptjs"); // Import bcrypt for password hashing
+const flash = require("connect-flash");
+const path = require("path");
 const mongoose = require("mongoose");
 
 const app = express();
@@ -13,7 +14,7 @@ const app = express();
 app.set("view engine", "ejs");
 
 // Set the views directory
-app.set("views", path.join(__dirname, "views")); // Assuming views folder is in the project directory
+app.set("views", path.join(__dirname, "views"));
 
 // Middleware to parse JSON and URL-encoded bodies
 app.use(express.json());
@@ -22,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 // Session middleware (to store user sessions)
 app.use(
   session({
-    secret: "secretKey", // Replace with a strong secret in production
+    secret: "secretKey",
     resave: false,
     saveUninitialized: true,
   })
@@ -39,16 +40,26 @@ app.use(passport.session());
 passport.use(
   new LocalStrategy(async function (username, password, done) {
     try {
-      // Find user by username
-      const user = await User.findOne({ username });
+      console.log("Attempting to log in with username:", username); // Debugging log
+
+      // Find user by username (case-insensitive)
+      const user = await User.findOne({ username: new RegExp("^" + username + "$", "i") });
+      
       if (!user) {
+        console.log("User not found with username:", username); // Debugging log
         return done(null, false, { message: "Incorrect username." });
       }
-      if (user.password !== password) { // Use password hashing in production
+
+      // Compare the password using bcrypt
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        console.log("Password does not match for username:", username); // Debugging log
         return done(null, false, { message: "Incorrect password." });
       }
+
       return done(null, user);
     } catch (err) {
+      console.error("Error during login process:", err);
       return done(err);
     }
   })
@@ -84,30 +95,28 @@ app.get("/login", (req, res) => {
 app.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/admin/dashboard", // Redirect to admin dashboard on success
-    failureRedirect: "/login", // Redirect back to login on failure
-    failureFlash: true, // Enable flash messages for login errors
+    successRedirect: "/admin/dashboard",
+    failureRedirect: "/login",
+    failureFlash: true,
   })
 );
 
 // Admin dashboard route (only accessible after login)
 app.get("/admin/dashboard", ensureAdmin, (req, res) => {
-  // Pass the user object to the view
   res.render("admin-dashboard", { user: req.user });
 });
-
 
 // Middleware to ensure the user is authenticated and isAdmin is true
 function ensureAdmin(req, res, next) {
   if (req.isAuthenticated() && req.user.isAdmin) {
-    return next(); // Proceed to the next middleware (admin dashboard)
+    return next();
   }
   res.redirect("/login");
 }
 
 // MongoDB connection
 mongoose
-  .connect("mongodb://localhost:27017/yourDatabaseName", {
+  .connect("mongodb+srv://hzerotwo002:H305898S@henry215x.myiys.mongodb.net/?retryWrites=true&w=majority&appName=henry215x", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -120,9 +129,9 @@ app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
 
-const orderRoutes = require('./routes/order');
-app.use('/orders', orderRoutes);
+// Routes
+const orderRoutes = require("./routes/order");
+app.use("/orders", orderRoutes);
 
-const adminRoutes = require('./routes/admin');
-app.use('/admin', adminRoutes);
-
+const adminRoutes = require("./routes/admin");
+app.use("/admin", adminRoutes);

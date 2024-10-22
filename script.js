@@ -147,3 +147,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 });
+
+document.getElementById('checkout-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Collect the necessary data for the order
+    const orderData = {
+        items: cartItems,  // cartItems should contain the products in the cart
+        totalAmount: calculateTotal(cartItems),  // Total price calculation
+        paymentMethod: document.querySelector('input[name="paymentMethod"]:checked').value,  // Payment method
+        shippingAddress: {
+            addressLine1: document.getElementById('address-line-1').value,
+            addressLine2: document.getElementById('address-line-2').value,
+            city: document.getElementById('city').value,
+            state: document.getElementById('state').value,
+            zipCode: document.getElementById('zip-code').value,
+            country: document.getElementById('country').value
+        }
+    };
+
+    // Send the order data to the server
+    fetch('/checkout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Order placed successfully');
+        } else {
+            alert('There was an issue placing the order.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+

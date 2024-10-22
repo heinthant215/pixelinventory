@@ -1,25 +1,29 @@
 const express = require('express');
-const Order = require('../models/order');
 const router = express.Router();
+const Order = require('../models/Order');
 
-// Submit an order
-router.post('/submit-order', async (req, res) => {
+// POST route to place a new order
+router.post('/order', async (req, res) => {
   try {
-    const { userId, items, totalAmount, paymentMethod, shippingAddress } = req.body;
+    const { userId, products, totalPrice, paymentMethod, shippingAddress } = req.body;
 
+    // Create a new order
     const newOrder = new Order({
-      user: userId,
-      items,
-      totalAmount,
+      userId,
+      products,
+      totalPrice,
       paymentMethod,
-      shippingAddress
+      shippingAddress,
     });
 
+    // Save the order to MongoDB
     await newOrder.save();
-    res.status(200).json({ message: 'Order submitted successfully' });
-  } catch (err) {
-    console.error('Error submitting order:', err);
-    res.status(500).json({ message: 'Server error' });
+
+    // Return success response
+    res.status(201).json({ message: 'Order placed successfully', order: newOrder });
+  } catch (error) {
+    console.error('Error placing order:', error);
+    res.status(500).json({ message: 'Failed to place order', error });
   }
 });
 
